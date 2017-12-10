@@ -64,7 +64,7 @@
 //        }
 
 
-        
+
         echo "<td><a href='comments.php?approve='>Approve</a></td>";
         echo "<td><a href='comments.php?unapprove='>Unapprove</a></td>";
         echo "<td><a href='comments.php?delete='>Delete</a></td>";

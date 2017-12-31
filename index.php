@@ -31,11 +31,8 @@
 
 
 
-                if($post_status !== 'published')
+                if($post_status == 'published')
                 {
-                   echo  "<h1 class='text-center'> NO POST SORRY</h1>";
-                }
-                else{
 
 
 

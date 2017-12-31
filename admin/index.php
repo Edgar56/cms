@@ -74,8 +74,8 @@
 
                                     $query = "SELECT * FROM comments";
                                     $select_all_comments = mysqli_query($connection,$query);
-                                    $comments_count = mysqli_num_rows($select_all_comments);
-                                    echo "  <div class='huge'>{$comments_count}</div>";
+                                    $comment_count = mysqli_num_rows($select_all_comments);
+                                    echo "  <div class='huge'>{$comment_count}</div>";
 
                                     ?>
 
@@ -158,6 +158,30 @@
             <!-- /.row -->
 
 
+            <?php
+
+                 /*  Post draft  */
+                $query = "SELECT * FROM posts WHERE post_status= 'draft'";
+                $select_all_draft_posts = mysqli_query($connection,$query);
+                $post_draft_count = mysqli_num_rows($select_all_draft_posts);
+
+                /*  Post draft  */
+                $query = "SELECT * FROM comments WHERE comment_status= 'unapproved'";
+                $unapproved_comments_query = mysqli_query($connection,$query);
+                $unapproved_comment_count = mysqli_num_rows($unapproved_comments_query);
+
+                /*  Post draft  */
+                $query = "SELECT * FROM users WHERE user_role= 'subscriber'";
+                $select_all_subscribers = mysqli_query($connection,$query);
+                $subscriber_count = mysqli_num_rows($select_all_subscribers);
+
+
+
+
+
+            ?>
+
+
             <div class="row">
 
                 <script type="text/javascript">
@@ -170,12 +194,16 @@
 
                             <?php
 
-                                
+                            $element_text = ['Active Posts', 'Draft Post', 'Comments', 'Pending Comments' ,'Users','Subscribers','Categories'];
+                            $element_count = [$post_count, $post_draft_count, $comment_count, $unapproved_comment_count , $user_count,$subscriber_count,$category_count];
+
+                            for($i=0; $i < 7; $i++) {
+                                echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
+
+                            }
 
                             ?>
 
-
-                            ['Posts', 1000]
                         ]);
 
                         var options = {

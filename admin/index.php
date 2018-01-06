@@ -160,18 +160,23 @@
 
             <?php
 
+                /*  Post published  */
+                $query = "SELECT * FROM posts WHERE post_status = 'published' ";
+                $select_all_published_posts = mysqli_query($connection,$query);
+                $post_published_count = mysqli_num_rows($select_all_published_posts);
+
                  /*  Post draft  */
-                $query = "SELECT * FROM posts WHERE post_status= 'draft'";
+                $query = "SELECT * FROM posts WHERE post_status = 'draft' ";
                 $select_all_draft_posts = mysqli_query($connection,$query);
                 $post_draft_count = mysqli_num_rows($select_all_draft_posts);
 
-                /*  Post draft  */
-                $query = "SELECT * FROM comments WHERE comment_status= 'unapproved'";
+                /*  Post unapproved  */
+                $query = "SELECT * FROM comments WHERE comment_status = 'unapproved' ";
                 $unapproved_comments_query = mysqli_query($connection,$query);
                 $unapproved_comment_count = mysqli_num_rows($unapproved_comments_query);
 
-                /*  Post draft  */
-                $query = "SELECT * FROM users WHERE user_role= 'subscriber'";
+                /*  subscribers  */
+                $query = "SELECT * FROM users WHERE user_role = 'subscriber' ";
                 $select_all_subscribers = mysqli_query($connection,$query);
                 $subscriber_count = mysqli_num_rows($select_all_subscribers);
 
@@ -185,7 +190,7 @@
             <div class="row">
 
                 <script type="text/javascript">
-                    google.charts.load('current', {'packages':['bar']});
+                    google.charts.load("visualization", "1.1", {packages:["bar"]});
                     google.charts.setOnLoadCallback(drawChart);
 
                     function drawChart() {
@@ -194,10 +199,10 @@
 
                             <?php
 
-                            $element_text = ['Active Posts', 'Draft Post', 'Comments', 'Pending Comments' ,'Users','Subscribers','Categories'];
-                            $element_count = [$post_count, $post_draft_count, $comment_count, $unapproved_comment_count , $user_count,$subscriber_count,$category_count];
+                            $element_text = ['All Posts','Active Posts', 'Draft Post', 'Comments', 'Pending Comments' ,'Users','Subscribers','Categories'];
+                            $element_count = [$post_count,$post_published_count, $post_draft_count, $comment_count, $unapproved_comment_count , $user_count,$subscriber_count,$category_count];
 
-                            for($i=0; $i < 7; $i++) {
+                            for($i=0; $i < 8; $i++) {
                                 echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
 
                             }
@@ -213,12 +218,13 @@
                             }
                         };
 
-                        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+                        var chart = new google.charts.Bar(document.getElementById('column_chart_material'));
 
                         chart.draw(data, google.charts.Bar.convertOptions(options));
                     }
                 </script>
-<div id="columnchart_material" style="width: auto; height: 500px;"></div>
+
+<div id="column_chart_material" style="width: auto; height: 500px;"></div>
 
             </div>
 

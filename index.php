@@ -17,6 +17,8 @@
 
             <?php
 
+            $per_page = 10;
+
 
             if (isset($_GET['page'])) {
 
@@ -29,7 +31,7 @@
             if ($page == "" || $page == 1) {
                 $page_1 = 0;
             } else {
-                $page_1 = ($page * 5) - 5;
+                $page_1 = ($page * $per_page) - $per_page;
             }
 
 
@@ -37,16 +39,16 @@
             $find_count = mysqli_query($connection, $post_query_count);
             $count = mysqli_num_rows($find_count);
 
-            $count = ceil($count / 5);
+            $count = ceil($count / $per_page);
 
 
-            $query = "SELECT * FROM posts LIMIT $page_1, 5 ";
+            $query = "SELECT * FROM posts LIMIT $page_1, $per_page ";
             $select_all_posts_query = mysqli_query($connection, $query);
 
             while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
                 $post_id = $row['post_id'];
                 $post_title = $row['post_title'];
-                $post_author = $row['post_author'];
+                $post_author = $row['post_user'];
                 $post_date = $row['post_date'];
                 $post_image = $row['post_image'];
                 $post_content = substr($row['post_content'],0,500) ;

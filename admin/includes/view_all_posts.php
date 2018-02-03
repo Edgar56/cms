@@ -38,15 +38,15 @@ if (isset($_POST['checkBoxArray'])) {
 
                 while ($row = mysqli_fetch_array($select_post_query)) {
 
-                    $post_title = $row['post_title'];
-                    $post_category_id = $row['post_category_id'];
-                    $post_date = $row['post_date'];
-                    $post_author = $row['post_author'];
-                    $post_user = $row ['post_user'];
-                    $post_status = $row['post_status'];
-                    $post_image = $row['post_image'];
-                    $post_tags = $row['post_tags'];
-                    $post_content = $row['post_content'];
+                    $post_title = escape($row['post_title']);
+                    $post_category_id = escape($row['post_category_id']);
+                    $post_date = escape($row['post_date']);
+                    $post_author = escape($row['post_author']);
+                    $post_user = escape($row ['post_user']);
+                    $post_status = escape($row['post_status']);
+                    $post_image = escape($row['post_image']);
+                    $post_tags = escape($row['post_tags']);
+                    $post_content = escape($row['post_content']);
 
                 }
 
@@ -113,17 +113,17 @@ if (isset($_POST['checkBoxArray'])) {
         $select_posts = mysqli_query($connection, $query);
 
         while ($row = mysqli_fetch_assoc($select_posts)) {
-            $post_id = $row['post_id'];
-            $post_author = $row['post_author'];
-            $post_user = $row['post_user'];
-            $post_title = $row['post_title'];
-            $post_category_id = $row['post_category_id'];
-            $post_status = $row['post_status'];
-            $post_image = $row['post_image'];
-            $post_tags = $row['post_tags'];
-            $post_comment_count = $row['post_comment_count'];
-            $post_date = $row['post_date'];
-            $post_views_count = $row['post_views_count'];
+            $post_id = escape($row['post_id']);
+            $post_author = escape($row['post_author']);
+            $post_user = escape($row['post_user']);
+            $post_title = escape($row['post_title']);
+            $post_category_id = escape($row['post_category_id']);
+            $post_status = escape($row['post_status']);
+            $post_image = escape($row['post_image']);
+            $post_tags = escape($row['post_tags']);
+            $post_comment_count = escape($row['post_comment_count']);
+            $post_date = escape($row['post_date']);
+            $post_views_count = escape($row['post_views_count']);
 
             echo "<tr>";
             ?>
@@ -155,8 +155,8 @@ if (isset($_POST['checkBoxArray'])) {
             $select_categories_id = mysqli_query($connection, $query);
 
             while ($row = mysqli_fetch_assoc($select_categories_id)) {
-                $cat_id = $row['cat_id'];
-                $cat_title = $row['cat_title'];
+                $cat_id = escape($row['cat_id']);
+                $cat_title = escape($row['cat_title']);
 
                 echo "<td> {$cat_title}</td>";
             }
@@ -171,7 +171,7 @@ if (isset($_POST['checkBoxArray'])) {
 
             $row = mysqli_fetch_array($send_comment_query);
 
-            $comment_id = $row ['comment_id'];
+            $comment_id = escape($row ['comment_id']);
 
             $count_comments = mysqli_num_rows($send_comment_query);
 
@@ -197,7 +197,7 @@ if (isset($_POST['checkBoxArray'])) {
 <?php
 
 if (isset($_GET['delete'])) {
-    $the_post_id = $_GET['delete'];
+    $the_post_id = escape($_GET['delete']);
 
 
     $query = "DELETE FROM posts WHERE post_id = {$the_post_id}";
@@ -207,7 +207,7 @@ if (isset($_GET['delete'])) {
 
 
 if (isset($_GET['reset'])) {
-    $the_post_id = $_GET['reset'];
+    $the_post_id = escape($_GET['reset']);
 
 
     $query = "UPDATE posts SET post_views_count = 0 WHERE post_id =" . mysqli_real_escape_string($connection, $_GET['reset']) . " ";

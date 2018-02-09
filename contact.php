@@ -1,11 +1,20 @@
+<?php ob_start(); ?>
 <?php include "includes/db.php"; ?>
 <?php include "includes/header.php"; ?>
 
 <?php
 
+$msg = "First line of text\nSecond line of text";
+// use wordwrap() if lines are longer than 70 characters
+$msg = wordwrap($msg, 70);
+# Headers
+$headers = 'From: webmaster@example.com' . "\r\n";
+// send email
+mail("edgaras.chalilovas@gmail.com", "subject", $msg, $headers); // --> Added $headers as 4th parameter
+
 if (isset($_POST['submit'])) {
 
-    $to = "edgar@gmail.com";
+    $to = "edgaras.chalilovas@gmail.com";
     $subject = $_POST['subject'];
     $body = $_POST['body'];
 

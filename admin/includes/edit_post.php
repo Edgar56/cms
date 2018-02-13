@@ -1,3 +1,4 @@
+
 <?php
 if(isset($_GET['p_id'])) {
 
@@ -28,7 +29,7 @@ if(isset($_GET['p_id'])) {
         $post_category_id = escape($_POST['post_category']);
         $post_status = escape($_POST['post_status']);
         $post_image = escape($_FILES ['image']['name']);
-        $post_image_temp = escape($_FILES ['image']['tmp_name']);
+        $post_image_temp = $_FILES ['image']['tmp_name'];
         $post_content = escape($_POST['post_content']);
         $post_tags = escape($_POST['post_tags']);
 
@@ -48,7 +49,7 @@ if(isset($_GET['p_id'])) {
 
         $query = "UPDATE posts SET ";
         $query .="post_title ='{$post_title}', ";
-        $query .="post_category_id ='{$post_category_id}', ";
+        $query .= "post_category_id ={$post_category_id}, ";
         $query .="post_date = now(), ";
         $query .="post_user ='{$post_user}', ";
         $query .="post_status ='{$post_status}', ";
@@ -71,7 +72,7 @@ if(isset($_GET['p_id'])) {
 
     <div class="form-group">
         <label for="title">Post Title</label>
-        <input value="<?php echo $post_title; ?>" type="text" class="form-control" name="post_title">
+        <input value="<?php echo $post_title; ?>" type="text" class="form-control" name="title">
     </div>
 
 
@@ -88,7 +89,7 @@ if(isset($_GET['p_id'])) {
 
             while ($row = mysqli_fetch_assoc($select_categories)) {
                 $cat_id = escape($row['cat_id']);
-                $cat_title = escape($row['cat_title']);
+                $cat_title = $row['cat_title'];
 
                 echo "<option value='$cat_id'>{$cat_title}</option> ";
 

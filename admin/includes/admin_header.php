@@ -47,11 +47,14 @@ if(!isset($_SESSION['user_role'])) {
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
     <![endif]-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 
     <script src="js/jquery.js"></script>
 
     <script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-alpha.2/classic/ckeditor.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.5/quill.js"></script>
+    <script src="//cdn.quilljs.com/1.3.5/quill.js"></script>
+
+    <link href="//cdn.quilljs.com/1.3.5/quill.snow.css" rel="stylesheet">
 
 
 </head>

@@ -40,7 +40,7 @@ if (isset($_POST['checkBoxArray'])) {
 
                 while ($row = mysqli_fetch_array($select_post_query)) {
 
-                    $post_title = escape($row['post_title']);
+                    $post_title = $row['post_title'];
                     $post_category_id = escape($row['post_category_id']);
                     $post_date = escape($row['post_date']);
                     $post_author = escape($row['post_author']);
@@ -48,7 +48,7 @@ if (isset($_POST['checkBoxArray'])) {
                     $post_status = escape($row['post_status']);
                     $post_image = escape($row['post_image']);
                     $post_tags = escape($row['post_tags']);
-                    $post_content = escape($row['post_content']);
+                    $post_content = $row['post_content'];
 
                 }
 
@@ -118,7 +118,7 @@ if (isset($_POST['checkBoxArray'])) {
             $post_id = escape($row['post_id']);
             $post_author = escape($row['post_author']);
             $post_user = escape($row['post_user']);
-            $post_title = escape($row['post_title']);
+            $post_title = $row['post_title'];
             $post_category_id = escape($row['post_category_id']);
             $post_status = escape($row['post_status']);
             $post_image = escape($row['post_image']);
@@ -158,7 +158,7 @@ if (isset($_POST['checkBoxArray'])) {
 
             while ($row = mysqli_fetch_assoc($select_categories_id)) {
                 $cat_id = escape($row['cat_id']);
-                $cat_title = escape($row['cat_title']);
+                $cat_title = $row['cat_title'];
 
                 echo "<td> {$cat_title}</td>";
             }

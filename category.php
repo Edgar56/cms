@@ -28,7 +28,7 @@
                 } else {
                     $query = "SELECT * FROM posts WHERE post_category_id =$post_category AND post_status = 'published'";
                 }
-                
+
                 $select_all_posts_query = mysqli_query($connection, $query);
 
                 if (mysqli_num_rows($select_all_posts_query) < 1) {

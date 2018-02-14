@@ -35,7 +35,14 @@
             }
 
 
-            $post_query_count = "SELECT * FROM posts WHERE post_status = 'published'";
+            if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+
+                $post_query_count = "SELECT * FROM posts";
+
+            } else {
+                $post_query_count = "SELECT * FROM posts WHERE post_status = 'published'";
+            }
+
             $find_count = mysqli_query($connection, $post_query_count);
             $count = mysqli_num_rows($find_count);
 

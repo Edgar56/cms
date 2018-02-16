@@ -1,11 +1,12 @@
 $(document).ready(function () {
 
     //Editor Quill
-
-
-    var quill = new Quill('#body', {
-        theme: 'snow'
-    });
+    ClassicEditor
+        .create(document.querySelector('#body'))
+        .catch(error = > {
+        console.error(error);
+} )
+    ;
     $('#selectAllBoxes').click(function (event) {
 
         if (this.checked) {

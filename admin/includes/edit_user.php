@@ -57,7 +57,7 @@ if (isset($_GET['edit_user'])) {
 
         $edit_user_query = mysqli_query($connection, $query);
         confirmQuery($edit_user_query);
-        echo "User Updated" . " <a href='users.php'>View Users?</a>";
+        echo "User Updated" . " <a href='users.php'>View Users</a>";
     }
 
 } else {

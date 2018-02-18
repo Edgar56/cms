@@ -1,5 +1,6 @@
 <?php include "includes/db.php" ?>
 <?php include "includes/header.php" ?>
+<?php include "admin/functions.php" ?>
 
     <!-- Navigation -->
 
@@ -21,12 +22,16 @@
                 $post_category = $_GET['category'];
 
 
-                if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+                if (is_admin($_SESSION['username'])) {
 
-                    $query = "SELECT * FROM posts WHERE post_category_id =$post_category ";
+                    $stmt1 = mysqli_prepare($connection, "SELECT post_id, post_title, post_author,
+ post_date, post_image, post_content FROM posts WHERE post_category_id = ? ");
 
                 } else {
-                    $query = "SELECT * FROM posts WHERE post_category_id =$post_category AND post_status = 'published'";
+                    $stmt2 = mysqli_prepare($connection, "SELECT post_id, post_title, post_author, post_date, post_image, post_content 
+FROM posts WHERE post_category_id = ? AND post_status = ? ");
+
+                    $published = 'published';
                 }
 
                 $select_all_posts_query = mysqli_query($connection, $query);

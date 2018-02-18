@@ -82,10 +82,10 @@
 <?php
 
 if(isset($_GET['approve'])) {
-    $the_comment_id = escape(['approve']);
+    $the_comment_id = escape($_GET['approve']);
 
     $query = "UPDATE comments set comment_status = 'approved' WHERE comment_id = $the_comment_id";
-    $unapprove_comment_query = mysqli_query($connection, $query);
+    $approve_comment_query = mysqli_query($connection, $query);
 
     header("Location: comments.php");
 }
@@ -93,7 +93,7 @@ if(isset($_GET['approve'])) {
 if(isset($_GET['unapprove'])) {
     $the_comment_id = escape($_GET['unapprove']);
 
-    $query = "UPDATE comments set comment_status = 'unapproved' WHERE comment_id = $the_comment_id";
+    $query = "UPDATE comments set comment_status = 'unapprove' WHERE comment_id = $the_comment_id";
     $approve_comment_query = mysqli_query($connection, $query);
 
     header("Location: comments.php");

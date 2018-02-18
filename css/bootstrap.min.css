@@ -3453,7 +3453,7 @@ select[multiple].form-group-lg .form-control, textarea.form-group-lg .form-contr
 .btn-success {
     color: #fff;
     background-color: #5cb85c;
-    border-color: #4cae4c
+    border-color: #4cae4c;
 }
 
 .btn-success.active, .btn-success.focus, .btn-success:active, .btn-success:focus, .btn-success:hover, .open > .dropdown-toggle.btn-success {

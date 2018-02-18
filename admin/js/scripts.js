@@ -2,11 +2,9 @@ $(document).ready(function () {
 
     //Editor Quill
     ClassicEditor
-        .create(document.querySelector('#body'))
-        .catch(error = > {
-        console.error(error);
-} )
-    ;
+        .create(document.querySelector('#body'));
+
+
     $('#selectAllBoxes').click(function (event) {
 
         if (this.checked) {

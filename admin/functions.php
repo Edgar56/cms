@@ -88,14 +88,20 @@ function insert_categories()
         if ($cat_title == "" || empty($cat_title)) {
             echo "This field should not be empty";
         } else {
-            $query = "INSERT INTO categories(cat_title)";
-            $query .= "Value('{$cat_title}')";
-            $create_category_query = mysqli_query($connection, $query);
 
-            if (!$create_category_query) {
-                die('QUERY FAILED' . mysqli_error());
-            }
+
+            $stmt = mysqli_prepare($connection, "INSERT INTO categories(cat_title) VALUES (?)");
+
+            mysqli_stmt_bind_param($stmt, 's', $cat_title);
+            mysqli_stmt_execute($stmt);
+
+            confirmQuery($stmt);
+
+            mysqli_stmt_close($stmt);
+
         }
+
+
     }
 
 

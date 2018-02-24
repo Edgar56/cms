@@ -8,8 +8,42 @@
 
 function redirect($location)
 {
-    return header("Location:" . $location);
+
+
+    header("Location:" . $location);
+    exit;
+
 }
+
+//Check if it is method
+function ifItIsMethod($method = null)
+{
+
+    if ($_SERVER['REQUEST_METHOD'] == strtoupper($method)) {
+
+        return true;
+
+    }
+    return false;
+}
+
+//Check user role
+function isLoggedIn()
+{
+    if (isset($_SESSION['user_role'])) {
+        return true;
+    }
+    return false;
+}
+
+
+function checkIfUserIsLoggedInAndRedirect($redirectLocation = null)
+{
+    if (isLoggedIn()) {
+        redirect($redirectLocation);
+    }
+}
+
 
 function escape($string)
 {
@@ -243,24 +277,25 @@ function register_user($username, $email, $password)
     }
 
 
-        $username = mysqli_real_escape_string($connection, $username);
-        $email = mysqli_real_escape_string($connection, $email);
-        $password = mysqli_real_escape_string($connection, $password);
+    $username = mysqli_real_escape_string($connection, $username);
+    $email = mysqli_real_escape_string($connection, $email);
+    $password = mysqli_real_escape_string($connection, $password);
 
-        $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
+    $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
-        $query = "INSERT INTO users (username, user_email, user_password,user_role) ";
-        $query .= "VALUES ('{$username}', '{$email}', '{$password}', 'subscriber')";
-        $register_user_query = mysqli_query($connection, $query);
+    $query = "INSERT INTO users (username, user_email, user_password,user_role) ";
+    $query .= "VALUES ('{$username}', '{$email}', '{$password}', 'subscriber')";
+    $register_user_query = mysqli_query($connection, $query);
 
-        confirmQuery($register_user_query);
+    confirmQuery($register_user_query);
 
 
 }
 
-function login_user($username, $password) {
+function login_user($username, $password)
+{
 
-    global  $connection;
+    global $connection;
 
     $username = trim($username);
     $password = trim($password);

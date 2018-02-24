@@ -1,5 +1,24 @@
-<div class="col-md-4">
 
+<?php
+
+
+    if(ifItIsMethod('post')) {
+        if(isset($_POST['username']) && isset($_POST['password'])) {
+            login_user($_POST['username'],$_POST['password']);
+        } else {
+            redirect('index');
+        }
+
+
+
+}
+
+
+?>
+
+
+
+<div class="col-md-4">
     <!-- Blog Search Well -->
     <div class="well">
         <h4>Blog Search</h4>
@@ -29,7 +48,7 @@
 
             <h4>Login</h4>
 
-            <form action="includes/login.php" method="post">
+            <form  method="post">
                 <div class="form-group">
                     <input name="username" type="text" class="form-control" placeholder="Enter Username">
                 </div>
@@ -40,6 +59,22 @@
                         <button class="btn btn-primary" name="login" type="submit">Submit</button>
                  </span>
                 </div>
+
+                <div>
+
+                    <div class="form-group">
+
+                        <a href="forgot_password.php?forgot_password=<?php echo uniqid(true); ?>">Forgot Password</a>
+
+                    </div>
+
+
+
+
+                </div>
+
+
+
             </form><!--search form-->
             <!-- /.input-group -->
 
@@ -71,7 +106,7 @@
                     while ($row = mysqli_fetch_assoc($select_categories_sidebar)) {
                         $cat_title = $row['cat_title'];
                         $cat_id = $row['cat_id'];
-                        echo "<li><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
+                        echo "<li><a href='/cms/category/$cat_id'>{$cat_title}</a></li>";
                     }
 
                     ?>

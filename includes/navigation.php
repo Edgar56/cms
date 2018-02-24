@@ -54,9 +54,33 @@
                 ?>
 
 
-                <li>
-                    <a href="/cms/admin">Admin</a>
+
+                <?php  if(isLoggedIn()):  ?>
+
+
+                    <li>
+                        <a href="/cms/admin">Admin</a>
                     </li>
+
+                    <li>
+                        <a href="/cms/includes/logout.php">Logout</a>
+                    </li>
+
+
+
+
+                <?php else: ?>
+
+                    <li>
+                        <a href="/cms/login">Login</a>
+                    </li>
+
+                <?php endif;?>
+
+
+
+
+
 
                 <li class='<?php echo $registration_class; ?>'>
                     <a href="/cms/registration">Registration</a>

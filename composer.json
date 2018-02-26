@@ -1,0 +1,12 @@
+{
+  "name": "vergil-pc/cms",
+  "require": {
+    "phpmailer/phpmailer": "^6.0"
+  },
+  "authors": [
+    {
+      "name": "Edgar56",
+      "email": "edgaras.chalilovas@gmail.com"
+    }
+  ]
+}

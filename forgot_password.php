@@ -10,7 +10,11 @@
 <?php  include "includes/header.php"; ?>
 <?php include "admin/functions.php" ?>
 
+
 <?php
+
+require './vendor/phpmailer/phpmailer/PHPMailerAutoload.php';
+require './classes/Config.php';
 
 if (!ifItIsMethod('get') && !isset($_GET['forgot_password'])) {
 
@@ -35,6 +39,39 @@ if (ifItIsMethod('post')) {
                 mysqli_stmt_bind_param($stmt, "s", $email);
                 mysqli_stmt_execute($stmt);
                 mysqli_stmt_close($stmt);
+
+                /**
+                 * Configure PHPMAILER
+                 *
+                 */
+
+                $mail = new PHPMailer();
+
+
+                //Server settings
+                $mail->isSMTP();                                      // Set mailer to use SMTP
+                $mail->Host = Config::SMTP_HOST;            // Specify main and backup SMTP servers
+                $mail->Username = Config::SMTP_USER;               // SMTP username
+                $mail->Password = Config::SMTP_PASSWORD;                        // SMTP password
+                $mail->Port = Config::SMTP_PORT;
+                $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+                $mail->SMTPAuth = true;
+                $mail->isHTML(true);
+
+                $mail->setFrom('yeah@gmail.com', 'Edgar Ch');
+                $mail->addAddress($email);
+
+                $mail->Subject = 'This is a test email';
+
+                $mail->Body = 'Email body';
+
+                if ($mail->send()) {
+                    echo "IT WAS SEND";
+                } else {
+
+                    echo "NOT SEND";
+                }
+
 
             }
 

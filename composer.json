@@ -3,6 +3,12 @@
   "require": {
     "phpmailer/phpmailer": "5.2.*"
   },
+  "autoload": {
+    "classmap": [
+      "classes"
+    ]
+  },
+
   "authors": [
     {
       "name": "Edgar56",

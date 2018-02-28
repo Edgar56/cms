@@ -13,8 +13,7 @@
 
 <?php
 
-require './vendor/phpmailer/phpmailer/PHPMailerAutoload.php';
-require './classes/Config.php';
+require './vendor/autoload.php';
 
 if (!ifItIsMethod('get') && !isset($_GET['forgot_password'])) {
 
@@ -57,13 +56,14 @@ if (ifItIsMethod('post')) {
                 $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
                 $mail->SMTPAuth = true;
                 $mail->isHTML(true);
+                $mail->CharSet = 'UTF-8';
 
                 $mail->setFrom('yeah@gmail.com', 'Edgar Ch');
                 $mail->addAddress($email);
 
                 $mail->Subject = 'This is a test email';
 
-                $mail->Body = 'Email body';
+                $mail->Body = '<h1>IT works YEAAAAAAHHHHHHH</h1>';
 
                 if ($mail->send()) {
                     echo "IT WAS SEND";

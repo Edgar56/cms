@@ -1,3 +1,4 @@
+<?php include "../cms/admin/functions.php" ?>
 <?php  if (session_status() == PHP_SESSION_NONE) session_start();  ?>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
@@ -67,8 +68,6 @@
                     </li>
 
 
-
-
                 <?php else: ?>
 
                     <li>
@@ -76,10 +75,6 @@
                     </li>
 
                 <?php endif;?>
-
-
-
-
 
 
                 <li class='<?php echo $registration_class; ?>'>
@@ -90,16 +85,15 @@
                 </li>
 
 
-
                 <?php
 
                 if(isset($_SESSION['user_role'])) {
 
-                  if(isset($_GET['p_id'])) {
+                    if(isset($_GET['p_id'])) {
 
-                      $the_post_id = $_GET['p_id'];
-                      echo "<li><a href='/cms/admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
-                  }
+                        $the_post_id = $_GET['p_id'];
+                        echo "<li><a href='/cms/admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
+                    }
 
                 }
                 ?>

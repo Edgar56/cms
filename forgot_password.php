@@ -8,14 +8,14 @@
 ?>
 <?php  include "includes/db.php"; ?>
 <?php  include "includes/header.php"; ?>
-<?php include "admin/functions.php" ?>
+<?php include "admin/functions.php"; ?>
 
 
 <?php
 
 require './vendor/autoload.php';
 
-if (!ifItIsMethod('get') && !isset($_GET['forgot_password'])) {
+if (!isset($_GET['forgot_password'])) {
 
     redirect('index');
 }
@@ -63,21 +63,20 @@ if (ifItIsMethod('post')) {
 
                 $mail->Subject = 'This is a test email';
 
-                $mail->Body = '<h1>IT works YEAAAAAAHHHHHHH</h1>';
+                $mail->Body = '<p>Please click to reset your password 
+                <a href="http://localhost/cms/reset.php?email=' . $email . '&token=' . $token . ' ">href="http://localhost/cms/reset.php?email=' . $email . '&token=' . $token . '</a>
+
+                </p>';
 
                 if ($mail->send()) {
-                    echo "IT WAS SEND";
+                    $emailSent = true;
                 } else {
 
                     echo "NOT SEND";
                 }
-
-
             }
 
         }
-
-
     }
 }
 
@@ -98,31 +97,37 @@ if (ifItIsMethod('post')) {
                     <div class="panel-body">
                         <div class="text-center">
 
-
-                            <h3><i class="fa fa-lock fa-4x"></i></h3>
-                            <h2 class="text-center">Forgot Password?</h2>
-                            <p>You can reset your password here.</p>
-                            <div class="panel-body">
+                            <?php if (!isset($emailSent)): ?>
 
 
+                                <h3><i class="fa fa-lock fa-4x"></i></h3>
+                                <h2 class="text-center">Forgot Password?</h2>
+                                <p>You can reset your password here.</p>
+                                <div class="panel-body">
 
 
-                                <form id="register-form" role="form" autocomplete="off" class="form" method="post">
+                                    <form id="register-form" role="form" autocomplete="off" class="form" method="post">
 
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
-                                            <input id="email" name="email" placeholder="email address" class="form-control"  type="email">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+                                                <input id="email" name="email" placeholder="email address" class="form-control" type="email">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
-                                    </div>
+                                        <div class="form-group">
+                                            <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
+                                        </div>
 
-                                    <input type="hidden" class="hide" name="token" id="token" value="">
-                                </form>
+                                        <input type="hidden" class="hide" name="token" id="token" value="">
+                                    </form>
 
-                            </div><!-- Body-->
+                                </div><!-- Body-->
+
+                            <?php else: ?>
+
+                                <h2>Please check your email</h2>
+
+                            <?php endif; ?>
 
                         </div>
                     </div>

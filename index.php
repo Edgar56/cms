@@ -1,6 +1,6 @@
 <?php include "includes/db.php" ?>
 <?php include "includes/header.php" ?>
-<?php include "../cms/admin/functions.php" ?>
+
 
     <!-- Navigation -->
 
@@ -84,7 +84,7 @@
 
 
                     <a href="post.php?p_id=<?php echo $post_id; ?>">
-                        <img class="img-responsive" src="images/<?php echo $post_image; ?>" alt="">
+                        <img class="img-responsive" src="images/<?php echo imagePlaceholder($post_image); ?>" alt="">
                     </a>
 
 

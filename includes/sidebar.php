@@ -1,21 +1,21 @@
-
 <?php
 
 
-    if(ifItIsMethod('post')) {
-        if(isset($_POST['username']) && isset($_POST['password'])) {
-            login_user($_POST['username'],$_POST['password']);
+if (ifItIsMethod('post')) {
+
+    if (isset($_POST['login'])) {
+        if (isset($_POST['username']) && isset($_POST['password'])) {
+            login_user($_POST['username'], $_POST['password']);
         } else {
             redirect('index');
         }
-
+    }
 
 
 }
 
 
 ?>
-
 
 
 <div class="col-md-4">
@@ -48,7 +48,7 @@
 
             <h4>Login</h4>
 
-            <form  method="post">
+            <form method="post">
                 <div class="form-group">
                     <input name="username" type="text" class="form-control" placeholder="Enter Username">
                 </div>
@@ -69,10 +69,7 @@
                     </div>
 
 
-
-
                 </div>
-
 
 
             </form><!--search form-->

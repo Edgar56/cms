@@ -6,6 +6,27 @@
  * Time: 12:39 PM
  */
 
+
+function currentUser()
+{
+    if (isset($_SESSION['username'])) {
+        return $_SESSION['username'];
+    }
+    return false;
+}
+
+
+function imagePlaceholder($image = '')
+{
+    if (!$image) {
+        return 'lambo_1.jpg';
+    } else {
+        return $image;
+
+    }
+}
+
+
 function redirect($location)
 {
 

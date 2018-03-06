@@ -1,8 +1,29 @@
 <?php session_start(); ?>
 <?php include "includes/db.php"; ?>
 <?php include "includes/header.php"; ?>
-<?php include "admin/functions.php" ?>
+<?php include "includes/navigation.php"; ?>
 <?php
+
+
+require 'vendor/autoload.php';
+
+$dotenv = new \Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+
+$options = array(
+    'cluster' => 'eu',
+    'encrypted' => true
+);
+
+$pusher = new Pusher\Pusher(
+    getenv('APP_KEY'),
+    getenv('APP_SECRET'),
+    getenv('APP_ID'),
+    $options);
+
+
+
+
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
@@ -58,6 +79,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if(empty($error)){
         register_user($username,$email,$password);
 
+        $data['message'] = $username;
+
+        $pusher->trigger('notifications', 'new_user', $data);
+
         login_user($username,$password);
     }
 
@@ -66,8 +91,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 ?>
 
 <!-- Navigation -->
-
-<?php include "includes/navigation.php"; ?>
 
 
 <!-- Page Content -->

@@ -19,7 +19,7 @@ function currentUser()
 function imagePlaceholder($image = '')
 {
     if (!$image) {
-        return 'lambo_1.jpg';
+        return 'lambo_hurican.jpg';
     } else {
         return $image;
 

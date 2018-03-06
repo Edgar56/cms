@@ -21,10 +21,17 @@
 
                 $the_post_id = $_GET['p_id'];
 
-                $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = $the_post_id ";
-                $send_query = mysqli_query($connection, $view_query);
+                $update_statement = mysqli_prepare($connection, "UPDATE posts SET post_views_count = post_views_count + 1 
+WHERE post_id = ?");
 
-                if (!$send_query) {
+                mysqli_stmt_bind_param($update_statement, "i", $the_post_id);
+
+                mysqli_stmt_execute($update_statement);
+
+//                $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = $the_post_id ";
+//                $send_query = mysqli_query($connection, $view_query);
+
+                if (!$update_statement) {
                     die("QUERY FAILED ");
                 }
 
@@ -66,7 +73,7 @@
                         </p>
                         <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date ?></p>
                         <hr>
-                        <img class="img-responsive" src="images/<?php echo imagePlaceholder($post_image); ?>" alt="">
+                        <img class="img-responsive" src="../images/<?php echo imagePlaceholder($post_image); ?>" alt="">
                         <hr>
                         <p><?php echo $post_content ?></p>
 
@@ -94,19 +101,8 @@
 
                             if (!$create_comment_query) {
                                 die('QUERY FAILED ' . mysqli_error($connection));
-                            } else {
-
-                                $message = "Your Comment was created!";
-                                echo $message;
-
                             }
-
-                        } else {
-
-                            echo "<script>alert('Fields cannot be empty')</script>";
-
                         }
-
                     }
 
                     ?>
@@ -172,6 +168,7 @@
 
                 header("Location: index.php");
             }
+
             ?>
 
 
